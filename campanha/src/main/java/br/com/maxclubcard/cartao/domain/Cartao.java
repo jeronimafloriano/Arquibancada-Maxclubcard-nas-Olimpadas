@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.Getter;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -19,6 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Entity
+@Table(name="cartao")
 public class Cartao {
 
   @Id

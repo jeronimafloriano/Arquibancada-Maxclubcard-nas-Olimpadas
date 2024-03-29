@@ -3,9 +3,6 @@ package br.com.maxclubcard.cliente.domain;
 import br.com.maxclubcard.campanha.domain.Campanha;
 import br.com.maxclubcard.cartao.domain.Cartao;
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -19,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.Getter;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -27,6 +25,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 @Getter
 @Entity
+@Table(name="cliente")
 public class Cliente {
 
   @Id

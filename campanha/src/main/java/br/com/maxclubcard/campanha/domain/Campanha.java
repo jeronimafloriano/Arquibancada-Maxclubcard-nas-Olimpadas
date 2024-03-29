@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import lombok.Getter;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -17,6 +18,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Getter
 @Entity
+@Table(name="campanha")
 public class Campanha {
 
   @Id
