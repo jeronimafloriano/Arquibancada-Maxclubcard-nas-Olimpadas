@@ -1,7 +1,7 @@
 package br.com.maxclubcard.cartao.domain;
 
 import br.com.maxclubcard.cliente.domain.Cliente;
-import java.time.YearMonth;
+import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,11 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Entity
@@ -43,11 +43,11 @@ public class Cartao {
   private Bandeira bandeira;
 
   @Column(name = "data_expiracao", nullable = false)
-  @DateTimeFormat(pattern = "MM-yy")
-  private YearMonth dataExpiracao;
+  private LocalDate dataExpiracao;
 
+  @Builder
   public Cartao(Cliente cliente, String numero, Tipo tipo,
-      Bandeira bandeira, YearMonth dataExpiracao) {
+      Bandeira bandeira, LocalDate dataExpiracao) {
     this.cliente = cliente;
     this.numero = numero;
     this.tipo = tipo;

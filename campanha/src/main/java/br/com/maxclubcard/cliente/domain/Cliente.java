@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -58,6 +59,7 @@ public class Cliente {
   @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
   private Set<Cartao> cartoes;
 
+  @Builder
   public Cliente(String nome, String cpf, LocalDate dataNascimento, Sexo sexo, Email email,
       String celular) {
 
@@ -70,6 +72,14 @@ public class Cliente {
   }
 
   protected Cliente() {
+  }
+
+  public void vincularCampanha(Campanha campanha) {
+    this.campanhas.add(campanha);
+  }
+
+  public void vincularCartao(Cartao cartao) {
+    this.cartoes.add(cartao);
   }
 
   @Override

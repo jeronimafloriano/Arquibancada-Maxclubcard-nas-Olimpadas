@@ -42,6 +42,10 @@ public class Campanha {
   protected Campanha() {
   }
 
+  public void vincularClientes(List<Cliente> clientes) {
+    this.clientes.addAll(clientes);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {

@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.tags.Tags;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +56,15 @@ public class CampanhaController {
   public CampanhaDto cadastrar(
       @Parameter(description = "Dados da campanha a ser cadastrada") @RequestBody @Valid CampanhaDto campanhaDto) {
     return campanhaService.cadastrar(campanhaDto);
+  }
+
+  @Operation(
+      description = "Adiciona clientes e cartões à uma campanha via arquivo",
+      tags = {"Campanha"})
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Campanhas adicionadas com sucesso")})
+  @PostMapping("/{id}/arquivo")
+  public void adicionar(@Parameter(description = "Id da campanha") @PathVariable Long id) {
+    campanhaService.adicionarViaArquivo(id);
   }
 }

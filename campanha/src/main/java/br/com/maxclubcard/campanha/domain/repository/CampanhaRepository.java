@@ -2,7 +2,6 @@ package br.com.maxclubcard.campanha.domain.repository;
 
 import br.com.maxclubcard.campanha.domain.Campanha;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
