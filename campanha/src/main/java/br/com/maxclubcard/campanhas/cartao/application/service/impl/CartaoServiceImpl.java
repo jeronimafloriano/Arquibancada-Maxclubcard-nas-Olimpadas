@@ -24,7 +24,6 @@ public class CartaoServiceImpl implements CartaoService {
     this.clienteFinder = clienteFinder;
   }
 
-
   @Override
   public CartaoDto cadastrar(CartaoDto cartaoDto) {
     Validations.isNotNull(cartaoDto, ValidationMessage.CARTAO_OBRIGATORIO);

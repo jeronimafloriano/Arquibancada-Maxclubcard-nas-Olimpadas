@@ -10,7 +10,7 @@ import br.com.maxclubcard.campanhas.cliente.domain.Email;
 import br.com.maxclubcard.campanhas.cliente.domain.repository.ClienteRepository;
 import br.com.maxclubcard.campanhas.config.leitor.LeitorArquivoStrategy;
 import br.com.maxclubcard.campanhas.config.leitor.impl.LeitorExcel;
-import br.com.maxclubcard.campanhas.events.CampanhaAtualizadaEvent;
+import br.com.maxclubcard.campanhas.shared.events.CampanhaAtualizadaEvent;
 import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
 import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import java.time.LocalDate;
@@ -103,5 +103,4 @@ public class ClienteServiceImpl implements ClienteService {
     }
     return clientes;
   }
-
 }
