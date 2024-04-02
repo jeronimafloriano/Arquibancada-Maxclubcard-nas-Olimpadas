@@ -2,6 +2,8 @@ package br.com.maxclubcard.campanhas.cliente.domain;
 
 import br.com.maxclubcard.campanhas.campanha.domain.Campanha;
 import br.com.maxclubcard.campanhas.cartao.domain.Cartao;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
+import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -68,6 +70,12 @@ public class Cliente {
   @Builder
   public Cliente(String nome, String cpf, LocalDate dataNascimento, Sexo sexo, Email email,
       String celular) {
+    Validations.isNotBlank(nome, ValidationMessage.NOME_OBRIGATORIO);
+    Validations.isNotBlank(cpf, ValidationMessage.CPF_OBRIGATORIO);
+    Validations.isNotNull(dataNascimento, ValidationMessage.DATA_NASCIMENTO_OBRIGATORIA);
+    Validations.isNotNull(sexo, ValidationMessage.SEXO_OBRIGATORIO);
+    Validations.isNotNull(email, ValidationMessage.EMAIL_OBRIGATORIO);
+    Validations.isNotNull(celular, ValidationMessage.CELULAR_OBRIGATORIO);
 
     this.nome = nome;
     this.cpf = cpf;

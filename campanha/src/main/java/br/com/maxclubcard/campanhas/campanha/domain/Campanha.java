@@ -1,6 +1,8 @@
 package br.com.maxclubcard.campanhas.campanha.domain;
 
 import br.com.maxclubcard.campanhas.cliente.domain.Cliente;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
+import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.util.Set;
@@ -42,6 +44,9 @@ public class Campanha {
   private Set<Cliente> clientes;
 
   public Campanha(String nome, BigDecimal valorMinimo) {
+    Validations.isNotBlank(nome, ValidationMessage.NOME_OBRIGATORIO);
+    Validations.isNotNull(valorMinimo, ValidationMessage.VALOR_MINIMO_OBRIGATORIO);
+
     this.nome = nome;
     this.valorMinimo = valorMinimo;
   }

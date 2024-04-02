@@ -1,6 +1,7 @@
 package br.com.maxclubcard.campanhas.sorteio.application.dto;
 
-import br.com.maxclubcard.campanhas.campanha.application.dto.CampanhaDto;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
+import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import br.com.maxclubcard.campanhas.sorteio.domain.SorteioParticipante;
 import br.com.maxclubcard.campanhas.cliente.application.dto.ClienteDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -42,6 +43,8 @@ public class SorteioParticipanteDto {
   }
 
   public static SorteioParticipanteDto map(SorteioParticipante sorteioParticipante) {
+    Validations.isNotNull(sorteioParticipante, ValidationMessage.DADOS_SORTEIO_OBRIGATORIO);
+
     SorteioParticipanteDto sorteioParticipanteDto = new SorteioParticipanteDto();
     sorteioParticipanteDto.setId(sorteioParticipante.getId());
     sorteioParticipanteDto.setNumeroDaSorte(sorteioParticipante.getNumeroDaSorte());

@@ -3,6 +3,8 @@ package br.com.maxclubcard.campanhas.cartao.application.dto;
 import br.com.maxclubcard.campanhas.cartao.domain.Bandeira;
 import br.com.maxclubcard.campanhas.cartao.domain.Cartao;
 import br.com.maxclubcard.campanhas.cartao.domain.Tipo;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
+import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -47,6 +49,8 @@ public class CartaoDto {
   }
 
   public static CartaoDto map(Cartao cartao) {
+    Validations.isNotNull(cartao, ValidationMessage.CARTAO_OBRIGATORIO);
+
     CartaoDto cartaoDto = new CartaoDto();
     cartaoDto.setId(cartao.getId());
     cartaoDto.setNumero(cartao.getNumero());

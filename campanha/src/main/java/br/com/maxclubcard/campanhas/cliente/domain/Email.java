@@ -21,7 +21,7 @@ public class Email {
     EmailValidator validator = new EmailValidator();
 
     if (!validator.isValid(address, null)) {
-      throw new InvalidArgumentException(ValidationMessage.INVALID_EMAIL);
+      throw new InvalidArgumentException(ValidationMessage.EMAIL_INVALIDO);
     }
 
     this.address = address;

@@ -2,6 +2,8 @@ package br.com.maxclubcard.campanhas.sorteio.domain;
 
 import br.com.maxclubcard.campanhas.campanha.domain.Campanha;
 import br.com.maxclubcard.campanhas.cliente.domain.Cliente;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
+import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,6 +39,10 @@ public class SorteioParticipante {
 
   public SorteioParticipante(Long numeroDaSorte, Campanha campanha,
       Cliente cliente) {
+    Validations.isNotNull(numeroDaSorte, ValidationMessage.NUMERO_DA_SORTE_OBRIGATORIO);
+    Validations.isNotNull(campanha, ValidationMessage.CAMPANHA_OBRIGATORIA);
+    Validations.isNotNull(cliente, ValidationMessage.CLIENTE_OBRIGATORIO);
+
     this.numeroDaSorte = numeroDaSorte;
     this.campanha = campanha;
     this.cliente = cliente;

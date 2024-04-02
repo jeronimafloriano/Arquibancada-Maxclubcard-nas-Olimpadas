@@ -4,8 +4,12 @@ import br.com.maxclubcard.campanhas.campanha.application.dto.CampanhaDto;
 import br.com.maxclubcard.campanhas.campanha.application.service.CampanhaService;
 import br.com.maxclubcard.campanhas.campanha.domain.Campanha;
 import br.com.maxclubcard.campanhas.campanha.domain.repository.CampanhaRepository;
+import br.com.maxclubcard.campanhas.shared.events.CampanhaAtualizadaEvent;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
+import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +37,16 @@ public class CampanhaServiceImpl implements CampanhaService {
   @Transactional
   @Override
   public CampanhaDto cadastrar(CampanhaDto campanhaDto) {
+    Validations.isNotNull(campanhaDto, ValidationMessage.CAMPANHA_OBRIGATORIA);
+
     Campanha campanha = new Campanha(campanhaDto.getNome(), campanhaDto.getValorMinimo());
     campanhaRepository.save(campanha);
     return CampanhaDto.map(campanha);
+  }
+
+  @EventListener(CampanhaAtualizadaEvent.class)
+  @Transactional
+  public void onApplicationEvent(CampanhaAtualizadaEvent event) {
+    campanhaRepository.save(event.getCampanha());
   }
 }

@@ -1,6 +1,8 @@
 package br.com.maxclubcard.campanhas.cartao.domain;
 
 import br.com.maxclubcard.campanhas.cliente.domain.Cliente;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
+import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -50,6 +52,12 @@ public class Cartao {
   @Builder
   public Cartao(Cliente cliente, String numero, Tipo tipo,
       Bandeira bandeira, LocalDate dataExpiracao) {
+    Validations.isNotNull(cliente, ValidationMessage.CLIENTE_OBRIGATORIO);
+    Validations.isNotBlank(numero, ValidationMessage.NUMERO_CARTAO_OBRIGATORIO);
+    Validations.isNotNull(tipo, ValidationMessage.TIPO_OBRIGATORIO);
+    Validations.isNotNull(bandeira, ValidationMessage.BANDEIRA_OBRIGATORIA);
+    Validations.isNotNull(dataExpiracao, ValidationMessage.DATA_EXPIRACAO_OBRIGATORIA);
+
     this.cliente = cliente;
     this.numero = numero;
     this.tipo = tipo;
