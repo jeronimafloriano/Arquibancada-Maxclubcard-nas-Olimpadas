@@ -5,6 +5,7 @@ import br.com.maxclubcard.campanhas.campanha.application.service.CampanhaService
 import br.com.maxclubcard.campanhas.campanha.domain.Campanha;
 import br.com.maxclubcard.campanhas.campanha.domain.repository.CampanhaRepository;
 import br.com.maxclubcard.campanhas.shared.events.CampanhaAtualizadaEvent;
+import br.com.maxclubcard.campanhas.shared.exceptions.DuplicatedException;
 import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
 import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import java.util.List;
@@ -39,6 +40,8 @@ public class CampanhaServiceImpl implements CampanhaService {
   public CampanhaDto cadastrar(CampanhaDto campanhaDto) {
     Validations.isNotNull(campanhaDto, ValidationMessage.CAMPANHA_OBRIGATORIA);
 
+    validarDuplicidadeNome(campanhaDto.getNome());
+
     Campanha campanha = new Campanha(campanhaDto.getNome(), campanhaDto.getValorMinimo());
     campanhaRepository.save(campanha);
     return CampanhaDto.map(campanha);
@@ -48,5 +51,12 @@ public class CampanhaServiceImpl implements CampanhaService {
   @Transactional
   public void onApplicationEvent(CampanhaAtualizadaEvent event) {
     campanhaRepository.save(event.getCampanha());
+  }
+
+  private void validarDuplicidadeNome(String nome) {
+    campanhaRepository.findByNome(nome)
+        .ifPresent(campanha -> {
+          throw new DuplicatedException(ValidationMessage.NOME_CAMPANHA_JA_EXISTE);
+        });
   }
 }

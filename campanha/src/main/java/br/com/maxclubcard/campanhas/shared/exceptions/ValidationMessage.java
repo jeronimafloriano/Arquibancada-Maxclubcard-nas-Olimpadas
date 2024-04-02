@@ -24,7 +24,8 @@ public enum ValidationMessage {
   CELULAR_OBRIGATORIO("00021", "É obrigatório informar o numero de celular."),
   DADOS_SORTEIO_OBRIGATORIO("00022", "É obrigatório informar os dados de participação do sorteio"),
   NUMERO_DA_SORTE_OBRIGATORIO("00023",
-      "É obrigatório a geração de um número da sorte para participação em sorteio");
+      "É obrigatório a geração de um número da sorte para participação em sorteio"),
+  NOME_CAMPANHA_JA_EXISTE("00024", "Já existe uma campanha cadastrada com esse nome.");
 
 
   private final String code;
