@@ -12,10 +12,12 @@ import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
 import java.math.BigDecimal;
 import java.util.Set;
 import java.util.stream.Collectors;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.NumberFormat;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +32,7 @@ public class CampanhaDto {
   private String nome;
 
   @NotNull
+  @Digits(integer=4, fraction=0, message="O valor deve ter no máximo 4 dígitos inteiros")
   private BigDecimal valorMinimo;
 
   @JsonProperty(access = Access.READ_ONLY)
