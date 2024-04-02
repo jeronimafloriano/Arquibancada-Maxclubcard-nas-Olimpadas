@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tags(value = {@Tag(name = "Sorteio", description = "Gerenciamento de sorteios")})
+@Tags(value = {@Tag(name = "Sorteio", description = "Gerenciamento de participação de sorteios")})
 @RestController
 @RequestMapping("/sorteio")
 public class SorteioParticipanteController {
@@ -27,13 +27,14 @@ public class SorteioParticipanteController {
   }
 
   @Operation(
-      description = "Realiza um sorteio",
+      description = "Realiza um sorteio com base nos participantes cadastrados em uma campanha",
       tags = {"Sorteio"})
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Sorteio realizado com sucesso")})
   @GetMapping("/{id}/sorteio")
-  public ResponseEntity<SorteioParticipanteDto> realizarSorteio(@Parameter(description = "Id da campanha a ser sorteada")
-                                                                @PathVariable Long id) {
+  public ResponseEntity<SorteioParticipanteDto> realizarSorteio(
+      @Parameter(description = "Id da campanha a ser sorteada")
+      @PathVariable Long id) {
     SorteioParticipanteDto sorteio = sorteioParticipanteService.realizarSorteio(id);
     return new ResponseEntity<>(sorteio, HttpStatus.OK);
   }

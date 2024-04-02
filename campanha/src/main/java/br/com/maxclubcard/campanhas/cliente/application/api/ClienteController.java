@@ -37,17 +37,18 @@ public class ClienteController {
   @PostMapping("/campanha/{id}")
   public ClienteDto cadastrar(
       @Parameter(description = "Id da campanha") @PathVariable Long id,
-      @Parameter(description = "Dados da campanha a ser cadastrada") @RequestBody @Valid ClienteDto clienteDto) {
+      @Parameter(description = "Dados do cliente a ser cadastrado na campanha") @RequestBody @Valid ClienteDto clienteDto) {
     return clienteService.cadastrar(id, clienteDto);
   }
 
   @Operation(
-      description = "Adiciona clientes à uma campanha via arquivo",
+      description = "Adiciona clientes à uma campanha via arquivo salvo na aplicação",
       tags = {"Cliente"})
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Campanhas adicionadas com sucesso")})
   @PostMapping("/campanha/{id}/arquivo")
-  public ResponseEntity<List<ClienteDto>> adicionar(@Parameter(description = "Id da campanha") @PathVariable Long id) {
+  public ResponseEntity<List<ClienteDto>> adicionar(
+      @Parameter(description = "Id da campanha em que serão adicionados os clientes") @PathVariable Long id) {
     List<ClienteDto> clientes = clienteService.adicionarViaArquivo(id);
     return new ResponseEntity<>(clientes, HttpStatus.OK);
   }
