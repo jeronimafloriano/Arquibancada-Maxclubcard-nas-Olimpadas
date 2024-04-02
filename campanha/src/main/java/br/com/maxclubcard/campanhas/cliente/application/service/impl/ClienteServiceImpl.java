@@ -31,6 +31,7 @@ public class ClienteServiceImpl implements ClienteService {
   @Value("${path.arquivo.campanha}")
   private String caminhoArquivo;
 
+
   private final ClienteRepository clienteRepository;
   private final CampanhaFinder campanhaFinder;
   private final ApplicationEventPublisher eventPublisher;
