@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS `cartao` (
     numero            VARCHAR(20) NOT NULL,
     tipo              VARCHAR(20),
     bandeira          VARCHAR(20),
-    data_expiracao    VARCHAR(7) NOT NULL,
+    data_expiracao    DATE,
     FOREIGN KEY (cliente_id) REFERENCES cliente(id)
 ) ENGINE=InnoDB;
