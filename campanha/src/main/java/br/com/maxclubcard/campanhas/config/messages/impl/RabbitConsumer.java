@@ -1,7 +1,7 @@
 package br.com.maxclubcard.campanhas.config.messages.impl;
 
 import br.com.maxclubcard.campanhas.config.messages.MessageConsumer;
-import br.com.maxclubcard.campanhas.events.TransacaoRecebidaEvent;
+import br.com.maxclubcard.campanhas.shared.events.TransacaoRecebidaEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
