@@ -1,4 +1,4 @@
-package br.com.maxclubcard;
+package br.com.maxclubcard.campanhas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

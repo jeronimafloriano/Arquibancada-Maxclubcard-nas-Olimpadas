@@ -1,4 +1,4 @@
-package br.com.maxclubcard.campanha;
+package br.com.maxclubcard.campanhas.campanha;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

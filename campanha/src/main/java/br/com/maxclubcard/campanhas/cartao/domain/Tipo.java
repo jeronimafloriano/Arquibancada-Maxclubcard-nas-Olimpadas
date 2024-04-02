@@ -1,4 +1,4 @@
-package br.com.maxclubcard.cartao.domain;
+package br.com.maxclubcard.campanhas.cartao.domain;
 
 import java.text.Normalizer;
 import java.util.Locale;

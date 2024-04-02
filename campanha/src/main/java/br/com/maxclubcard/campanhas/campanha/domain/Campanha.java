@@ -1,7 +1,9 @@
-package br.com.maxclubcard.campanha.domain;
+package br.com.maxclubcard.campanhas.campanha.domain;
 
-import br.com.maxclubcard.cliente.domain.Cliente;
-import java.util.List;
+import br.com.maxclubcard.campanhas.cliente.domain.Cliente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.math.BigDecimal;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,21 +30,26 @@ public class Campanha {
   @Column(name = "nome")
   private String nome;
 
+  @Column(name = "valor_minimo")
+  private BigDecimal valorMinimo;
+
   @ManyToMany
   @JoinTable(
       name = "cliente_campanha",
       joinColumns = @JoinColumn(name = "campanha_id"),
       inverseJoinColumns = @JoinColumn(name = "cliente_id"))
-  private List<Cliente> clientes;
+  @JsonIgnore
+  private Set<Cliente> clientes;
 
-  public Campanha(String nome) {
+  public Campanha(String nome, BigDecimal valorMinimo) {
     this.nome = nome;
+    this.valorMinimo = valorMinimo;
   }
 
   protected Campanha() {
   }
 
-  public void vincularClientes(List<Cliente> clientes) {
+  public void vincularClientes(Set<Cliente> clientes) {
     this.clientes.addAll(clientes);
   }
 

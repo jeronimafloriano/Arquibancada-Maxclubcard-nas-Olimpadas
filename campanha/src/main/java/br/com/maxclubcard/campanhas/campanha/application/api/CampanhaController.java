@@ -1,7 +1,7 @@
-package br.com.maxclubcard.campanha.application.api;
+package br.com.maxclubcard.campanhas.campanha.application.api;
 
-import br.com.maxclubcard.campanha.application.dto.CampanhaDto;
-import br.com.maxclubcard.campanha.application.service.CampanhaService;
+import br.com.maxclubcard.campanhas.campanha.application.dto.CampanhaDto;
+import br.com.maxclubcard.campanhas.campanha.application.service.CampanhaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -56,15 +56,5 @@ public class CampanhaController {
   public CampanhaDto cadastrar(
       @Parameter(description = "Dados da campanha a ser cadastrada") @RequestBody @Valid CampanhaDto campanhaDto) {
     return campanhaService.cadastrar(campanhaDto);
-  }
-
-  @Operation(
-      description = "Adiciona clientes e cartões à uma campanha via arquivo",
-      tags = {"Campanha"})
-  @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "Campanhas adicionadas com sucesso")})
-  @PostMapping("/{id}/arquivo")
-  public void adicionar(@Parameter(description = "Id da campanha") @PathVariable Long id) {
-    campanhaService.adicionarViaArquivo(id);
   }
 }

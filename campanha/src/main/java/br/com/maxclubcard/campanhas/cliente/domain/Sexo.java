@@ -1,4 +1,4 @@
-package br.com.maxclubcard.cliente.domain;
+package br.com.maxclubcard.campanhas.cliente.domain;
 
 import java.util.Locale;
 

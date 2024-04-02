@@ -1,6 +1,6 @@
-package br.com.maxclubcard.cartao.domain.repository;
+package br.com.maxclubcard.campanhas.cartao.domain.repository;
 
-import br.com.maxclubcard.cartao.domain.Cartao;
+import br.com.maxclubcard.campanhas.cartao.domain.Cartao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CartaoRepository extends JpaRepository<Cartao, Long> {

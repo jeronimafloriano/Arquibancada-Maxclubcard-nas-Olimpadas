@@ -1,4 +1,4 @@
-package br.com.maxclubcard.config.leitor;
+package br.com.maxclubcard.campanhas.config.leitor;
 
 import java.util.Collection;
 import java.util.List;
