@@ -22,21 +22,22 @@ Foram construídos três microsserviços, que consistem em:<br>
 A porta do servidor é 8082. A porta do gateway é a 8083. Os serviços "transacoes" e "campanhas" serão executados em portas dinamicas direcionadas pelo gateway.
 
 Ao rodar os serviços, poderá acessar o endereço http://localhost:8082/ e verificar as instâncias do serviços executando no servidor.
-Para acessar o endpoint dos serviços "transacoes" e "campanhas" é necessario apontar a rota para o gateway.
-Transacoes: http://localhost:8083/transacoes-ms/
-Campanhas: http://localhost:8083/campanha-ms/
+Para acessar o endpoint dos serviços "transacoes" e "campanhas" é necessario apontar a rota para o gateway.<br>
+Transacoes: http://localhost:8083/transacoes-ms/ <br>
+Campanhas: http://localhost:8083/campanha-ms/ <br>
 
-Esses serviços estão documentados com o swagger. Para acessar:
-Transacoes: http://localhost:8083/transacoes-ms/swagger-ui/index.html
+Esses serviços estão documentados com o swagger. Para acessar: <br>
+Transacoes: http://localhost:8083/transacoes-ms/swagger-ui/index.html <br>
 Campanhas: http://localhost:8083/campanha-ms/swagger-ui/index.html
 
-Obs: O serviço de "campanhas" possui testes. Para executá-los, após rodar o docker acesse a pasta /campanhas na linha de comando e execute "mvn test"
+***<h3>Testes</h3>***
+O serviço de "campanhas" possui testes. Para executá-los, após rodar o docker acesse a pasta /campanhas na linha de comando e execute "mvn test".
 
 ***<h3>Vídeo de execução do projeto</h3>***
 Gravei um vídeo de execução, que pode ser visto em: <br>
 https://www.loom.com/share/8951c5d2f4a042afa3ffb1194d3f99bb?sid=0ae640af-a4f8-4601-9c19-1c2ecec41a30
 
-
+<br>
 
 Obs 1 : Se houver qualquer problema com o vídeo acima, também salvei no drive, onde poderá ser feito o download em:
 https://drive.google.com/file/d/1UV578aG8qI-ws1zWPLUfM_PdHuBSa-2V/view?usp=sharing
