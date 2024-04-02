@@ -25,7 +25,8 @@ public enum ValidationMessage {
   DADOS_SORTEIO_OBRIGATORIO("00022", "É obrigatório informar os dados de participação do sorteio"),
   NUMERO_DA_SORTE_OBRIGATORIO("00023",
       "É obrigatório a geração de um número da sorte para participação em sorteio"),
-  NOME_CAMPANHA_JA_EXISTE("00024", "Já existe uma campanha cadastrada com esse nome.");
+  NOME_CAMPANHA_JA_EXISTE("00024", "Já existe uma campanha cadastrada com esse nome."),
+  NUMERO_BANDEIRA_CARTAO_JA_CADASTRADO("00025", "Já existe um cartão cadastrado com o número e bandeira informados.");
 
 
   private final String code;
