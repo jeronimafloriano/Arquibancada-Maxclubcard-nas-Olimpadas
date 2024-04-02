@@ -1,4 +1,4 @@
-package br.com.maxclubcard.campanhas.events;
+package br.com.maxclubcard.campanhas.shared.events;
 
 import org.springframework.context.ApplicationEvent;
 

@@ -4,7 +4,7 @@ import br.com.maxclubcard.campanhas.campanha.application.service.finder.Campanha
 import br.com.maxclubcard.campanhas.campanha.domain.Campanha;
 import br.com.maxclubcard.campanhas.cliente.application.service.finder.ClienteFinder;
 import br.com.maxclubcard.campanhas.cliente.domain.Cliente;
-import br.com.maxclubcard.campanhas.events.TransacaoRecebidaEvent;
+import br.com.maxclubcard.campanhas.shared.events.TransacaoRecebidaEvent;
 import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
 import br.com.maxclubcard.campanhas.shared.exceptions.Validations;
 import br.com.maxclubcard.campanhas.sorteio.application.dto.SorteioParticipanteDto;
@@ -19,14 +19,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class SorteioParticpanteServiceImpl implements SorteioParticipanteService {
+public class SorteioParticipanteServiceImpl implements SorteioParticipanteService {
 
   private final SorteioParticipanteRepository sorteioParticipanteRepository;
   private final CampanhaFinder campanhaFinder;
   private final ClienteFinder clienteFinder;
   private Random random;
 
-  public SorteioParticpanteServiceImpl(
+  public SorteioParticipanteServiceImpl(
       SorteioParticipanteRepository sorteioParticipanteRepository,
       CampanhaFinder campanhaFinder,
       ClienteFinder clienteFinder) {
@@ -36,6 +36,7 @@ public class SorteioParticpanteServiceImpl implements SorteioParticipanteService
     random = new Random();
   }
 
+  @Transactional
   @Override
   public SorteioParticipanteDto realizarSorteio(Long campanhaId) {
     Validations.isNotNull(campanhaId, ValidationMessage.ID_CAMPANHA_OBRIGATORIO);
@@ -44,7 +45,6 @@ public class SorteioParticpanteServiceImpl implements SorteioParticipanteService
         campanhaId);
 
     int indiceAleatorio = random.nextInt(sorteioParticipante.size());
-
     return SorteioParticipanteDto.map(sorteioParticipante.get(indiceAleatorio));
   }
 
@@ -67,7 +67,8 @@ public class SorteioParticpanteServiceImpl implements SorteioParticipanteService
   }
 
   private void gerarNumerosDaSorte(String cpf, BigDecimal valor) {
-    Long numeroDaSorte = 1000000 + random.nextLong((9999999 - 1000000 + 1));
+    Validations.isNotNull(cpf, ValidationMessage.CPF_OBRIGATORIO);
+    Validations.isNotNull(valor, ValidationMessage.VALOR_MINIMO_OBRIGATORIO);
 
     List<Campanha> campanhasElegiveisPorCpf = campanhaFinder.buscarPorClienteEValorCampanha(valor,
         cpf);
@@ -75,8 +76,12 @@ public class SorteioParticpanteServiceImpl implements SorteioParticipanteService
 
     List<SorteioParticipante> sorteioParticipante = campanhasElegiveisPorCpf.stream()
         .map(campanha ->
-            new SorteioParticipante(numeroDaSorte, campanha, cliente)).toList();
+            new SorteioParticipante(getNumeroAleatorio(), campanha, cliente)).toList();
 
     sorteioParticipanteRepository.saveAll(sorteioParticipante);
+  }
+
+  private Long getNumeroAleatorio() {
+    return  1000000 + random.nextLong((9999999 - 1000000 + 1));
   }
 }

@@ -1,4 +1,4 @@
-package br.com.maxclubcard.campanhas.events;
+package br.com.maxclubcard.campanhas.shared.events;
 
 import br.com.maxclubcard.campanhas.campanha.domain.Campanha;
 
