@@ -1,4 +1,4 @@
-package br.com.maxclubcard.transacoes;
+package br.com.maxclubcard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

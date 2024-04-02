@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class RabbitProducer implements Producer {
 
-  private RabbitTemplate rabbitTemplate;
-  private Queue queue;
+  private final RabbitTemplate rabbitTemplate;
+  private final Queue queue;
 
   public RabbitProducer(RabbitTemplate rabbitTemplate, Queue queue) {
     this.rabbitTemplate = rabbitTemplate;
