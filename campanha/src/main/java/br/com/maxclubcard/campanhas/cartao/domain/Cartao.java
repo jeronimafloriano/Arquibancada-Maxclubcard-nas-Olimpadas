@@ -69,7 +69,7 @@ public class Cartao {
   }
 
   public static Cartao gerarCartao(List<String> dado, Cliente cliente) {
-    String numeroCartao = dado.get(6);
+    String numeroCartao = dado.get(6).trim();
     LocalDate dataExp = LocalDate.parse(dado.get(7), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     Tipo tipo = Tipo.convert(dado.get(8));
     Bandeira bandeira = Bandeira.convert(dado.get(9));
