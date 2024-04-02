@@ -1,7 +1,9 @@
-package br.com.maxclubcard.config;
+package br.com.maxclubcard.campanhas.config.swagger;
 
 import java.util.Arrays;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.service.Contact;
 
 import org.springframework.context.annotation.Bean;
@@ -15,7 +17,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfiguration {
+public class SwaggerConfiguration implements WebMvcConfigurer {
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+    registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");}
 
   public static final Contact DEFAULT_CONTACT = new Contact(
       "Jeronima Antonia Floriano", "https://br.linkedin.com/in/jeronimafloriano", "jeronimajc@hotmail.com");

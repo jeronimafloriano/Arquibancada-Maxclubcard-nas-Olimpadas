@@ -1,7 +1,10 @@
-package br.com.maxclubcard.cliente.domain;
+package br.com.maxclubcard.campanhas.cliente.domain;
 
+import br.com.maxclubcard.campanhas.shared.exceptions.InvalidArgumentException;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
@@ -10,6 +13,7 @@ import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 @Access(AccessType.FIELD)
 public class Email {
 
+  @Column(name = "email")
   @NotNull
   private String address;
 
@@ -17,7 +21,7 @@ public class Email {
     EmailValidator validator = new EmailValidator();
 
     if (!validator.isValid(address, null)) {
-      throw new RuntimeException();
+      throw new InvalidArgumentException(ValidationMessage.INVALID_EMAIL);
     }
 
     this.address = address;

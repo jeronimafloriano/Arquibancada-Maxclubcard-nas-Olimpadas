@@ -1,8 +1,12 @@
-package br.com.maxclubcard.cliente.domain;
+package br.com.maxclubcard.campanhas.cliente.domain;
 
-import br.com.maxclubcard.campanha.domain.Campanha;
-import br.com.maxclubcard.cartao.domain.Cartao;
+import br.com.maxclubcard.campanhas.campanha.domain.Campanha;
+import br.com.maxclubcard.campanhas.cartao.domain.Cartao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -54,10 +58,12 @@ public class Cliente {
   private String celular;
 
   @ManyToMany(mappedBy = "clientes")
-  private List<Campanha> campanhas;
+  @JsonIgnore
+  private List<Campanha> campanhas = new ArrayList<>();
 
   @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-  private Set<Cartao> cartoes;
+  @JsonIgnore
+  private Set<Cartao> cartoes = new HashSet<>();
 
   @Builder
   public Cliente(String nome, String cpf, LocalDate dataNascimento, Sexo sexo, Email email,
@@ -74,12 +80,24 @@ public class Cliente {
   protected Cliente() {
   }
 
-  public void vincularCampanha(Campanha campanha) {
-    this.campanhas.add(campanha);
-  }
-
   public void vincularCartao(Cartao cartao) {
     this.cartoes.add(cartao);
+  }
+
+  public static Cliente gerarCliente(List<String> dado, Campanha campanha) {
+    String nome = dado.get(0);
+    String cpf = dado.get(1);
+    LocalDate nascimento = LocalDate.parse(dado.get(2), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    Sexo sexo = Sexo.convert(dado.get(3));
+    Email email = Email.of(dado.get(4));
+    String celular = dado.get(5);
+
+    Cliente cliente = Cliente.builder().nome(nome).cpf(cpf)
+        .dataNascimento(nascimento).sexo(sexo).email(email)
+        .celular(celular).build();
+
+    cliente.campanhas.add(campanha);
+    return cliente;
   }
 
   @Override
@@ -104,7 +122,8 @@ public class Cliente {
 
   @Override
   public int hashCode() {
-    return new HashCodeBuilder(17, 37).appendSuper(super.hashCode()).append(cpf).append(cpf)
+    return new HashCodeBuilder(17, 37)
+        .append(cpf).append(cpf)
         .toHashCode();
   }
 

@@ -1,17 +1,22 @@
-package br.com.maxclubcard.campanha.application.dto;
+package br.com.maxclubcard.campanhas.campanha.application.dto;
 
-import br.com.maxclubcard.campanha.domain.Campanha;
-import br.com.maxclubcard.cliente.domain.Cliente;
+import br.com.maxclubcard.campanhas.campanha.domain.Campanha;
+import br.com.maxclubcard.campanhas.cliente.application.dto.ClienteDto;
+import br.com.maxclubcard.campanhas.cliente.domain.Cliente;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.AccessMode;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class CampanhaDto {
 
@@ -22,19 +27,25 @@ public class CampanhaDto {
   @NotNull
   private String nome;
 
+  @NotNull
+  private BigDecimal valorMinimo;
+
   @JsonProperty(access = Access.READ_ONLY)
   @Schema(accessMode= AccessMode.READ_ONLY)
-  private List<Cliente> cliente;
+  private Set<ClienteDto> cliente;
 
-  public CampanhaDto(String nome) {
+  public CampanhaDto(String nome, BigDecimal valorMinimo) {
     this.nome = nome;
+    this.valorMinimo = valorMinimo;
   }
+
 
   public static CampanhaDto map(Campanha campanha) {
     CampanhaDto campanhaDto = new CampanhaDto();
     campanhaDto.setId(campanha.getId());
     campanhaDto.setNome(campanha.getNome());
-    campanhaDto.setCliente(campanha.getClientes());
+    campanhaDto.setValorMinimo(campanha.getValorMinimo());
+    campanhaDto.setCliente(campanha.getClientes().stream().map(ClienteDto::map).collect(Collectors.toSet()));
 
     return campanhaDto;
   }

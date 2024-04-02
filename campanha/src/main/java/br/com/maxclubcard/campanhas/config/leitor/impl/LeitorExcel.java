@@ -1,8 +1,9 @@
-package br.com.maxclubcard.config.leitor.impl;
+package br.com.maxclubcard.campanhas.config.leitor.impl;
 
-import br.com.maxclubcard.config.leitor.LeitorArquivo;
+import br.com.maxclubcard.campanhas.config.leitor.LeitorArquivo;
+import br.com.maxclubcard.campanhas.shared.exceptions.InvalidArgumentException;
+import br.com.maxclubcard.campanhas.shared.exceptions.ValidationMessage;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -60,7 +61,7 @@ public class LeitorExcel implements LeitorArquivo {
       String dataFormatadaString = this.formatarData(formatoData, dataFormatada);
       data.get(r.getRowNum()).add(dataFormatadaString);
     } catch (NumberFormatException e) {
-      System.out.println(e.getMessage());
+      throw new InvalidArgumentException(ValidationMessage.DATA_INVALIDA);
     }
   }
 

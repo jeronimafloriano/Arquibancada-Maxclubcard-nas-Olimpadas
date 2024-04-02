@@ -1,7 +1,9 @@
-package br.com.maxclubcard.cartao.domain;
+package br.com.maxclubcard.campanhas.cartao.domain;
 
-import br.com.maxclubcard.cliente.domain.Cliente;
+import br.com.maxclubcard.campanhas.cliente.domain.Cliente;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -56,6 +58,15 @@ public class Cartao {
   }
 
   protected Cartao() {
+  }
+
+  public static Cartao gerarCartao(List<String> dado, Cliente cliente) {
+    String numeroCartao = dado.get(6);
+    LocalDate dataExp = LocalDate.parse(dado.get(7), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    Tipo tipo = Tipo.convert(dado.get(8));
+    Bandeira bandeira = Bandeira.convert(dado.get(9));
+    return Cartao.builder().numero(numeroCartao).dataExpiracao(dataExp).tipo(tipo)
+        .bandeira(bandeira).cliente(cliente).build();
   }
 
   @Override
